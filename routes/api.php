@@ -23,3 +23,4 @@ header('Access-Control-Allow-Headers:  Accept, Content-Type, X-Auth-Token, Origi
 
 require __DIR__ . '/auth/auth.php';
 require __DIR__ . '/auth/passwordReset.php';
+require __DIR__ . '/film/film.php';

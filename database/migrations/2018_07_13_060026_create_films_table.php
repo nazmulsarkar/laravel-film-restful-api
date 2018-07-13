@@ -17,10 +17,11 @@ class CreateFilmsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->date('release_on');
             $table->integer('rating');
-            $table->interger('price');
+            $table->integer('price');
             $table->string('country');
             $table->string('genre');
             $table->string('photo');
