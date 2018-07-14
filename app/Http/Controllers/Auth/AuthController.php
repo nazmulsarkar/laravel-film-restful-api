@@ -46,6 +46,7 @@ class AuthController extends Controller
         $user->notify(new SignupActivate($user));
 
         return response()->json([
+            'success' => true,
             'message' => __('auth.signup_success')
         ], 201);
     }
@@ -135,7 +136,8 @@ class AuthController extends Controller
         $request->user()->token()->revoke();
 
         return response()->json([
-            'message' => __('auth.logout_success')
+            'message' => __('auth.logout_success'),
+            'success' => true
         ]);
     }
 

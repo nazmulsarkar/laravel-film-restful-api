@@ -30,20 +30,21 @@ class FilmController extends Controller
         $inputs = $request->only('title', 'description', 'release_on', 'rating', 'price', 'country', 'genre', 'photo');
         $inputs['user_id'] = $user->id;
 
-        $messages = [
-            'image64' => 'The :attribute must be a file of type: :values.',
-        ];
+        // $messages = [
+        //     'mimes' => 'The :attribute must be a file of type: :values.',
+        //     'max' => 'The :attribute must be maximum of: :values kb.',
+        // ];
 
         $validator = Validator::make($inputs, [
+            'photo' => 'required', // |image|mimetypes:image/jpeg,image/jpg,image/png
             'title' => 'required',
             'description' => 'required',
             'release_on' => 'required',
             'rating' => 'required',
             'price' => 'required',
             'country' => 'required',
-            'genre' => 'required',
-            'photo' => 'required|image64:image/jpeg, image/jpg, image/png'
-        ], $messages);
+            'genre' => 'required'
+        ]);
 
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()]);
@@ -59,7 +60,7 @@ class FilmController extends Controller
             return response()->json(['success' => true, 'filminfo' => $film], 201);
         }
         // $film = Film::create($inputs);
-        // return response()->json(['success' => true, 'filminfo' => $film], 201);
+        // return response()->json($inputs, 200);
         return response()->json(['success' => false], 200);
     }
 
