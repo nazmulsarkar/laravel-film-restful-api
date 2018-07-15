@@ -13,5 +13,6 @@ Route::group([
     ], function() {
         Route::post('/mine', 'FilmController@filmsMine');
         Route::post('/create', 'FilmController@store');
+        Route::post('/{film_id}/comments', 'CommentController@store');
     });
 });
