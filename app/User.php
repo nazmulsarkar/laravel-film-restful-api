@@ -27,4 +27,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'activation_token', 'remember_token',
     ];
+
+    public function films()
+    {
+        return $this->hasMany('\Models\Film','user_id','id');
+    }
+    public function comments()
+    {
+        return $this->hasManyThrough('\Models\Comment','\Models\Film','user_id','film_id');
+    }
 }

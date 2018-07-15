@@ -80,10 +80,10 @@ class FilmController extends Controller
 
     public function filmsMine()
     {
-        $films_mine = Film::where('user_id', Auth::user()->id)
+        $films = Film::where('user_id', Auth::user()->id)
                ->orderBy('created_at', 'desc')
                ->take(100)
                ->get();
-        return response()->json(['success' => true, 'films_mine' => $films_mine], 200);
+        return response()->json($films, 200);
     }
 }

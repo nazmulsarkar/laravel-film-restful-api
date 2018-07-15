@@ -30,4 +30,13 @@ class Film extends Model
     {
         return 'slug';
     }
+
+    public function films()
+    {
+        $this->hasMany('\Models\Comment','film_id','id');
+    }
+    public function user()
+    {
+        $this->belongsTo('\Models\User','user_id','id');
+    }
 }

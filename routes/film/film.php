@@ -2,12 +2,16 @@
 
 Route::group([
     'namespace' => 'Film',
-    'middleware' => 'auth:api',
+    'middleware' => 'api',
     'prefix' => 'films'
 ], function () {
     Route::get('/', 'FilmController@index');
-    Route::post('/create', 'FilmController@store');
     Route::get('/{slug}', 'FilmController@show');
-    // Route::post('signup', 'AuthController@signup');
-    // Route::get('signup/activate/{token}', 'AuthController@signupActivate');
+
+    Route::group([
+        'middleware' => 'auth:api',
+    ], function() {
+        Route::post('/mine', 'FilmController@filmsMine');
+        Route::post('/create', 'FilmController@store');
+    });
 });
