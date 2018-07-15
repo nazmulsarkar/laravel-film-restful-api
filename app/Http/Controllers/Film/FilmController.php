@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Film;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Film;
+use App\Comment;
 use Validator;
 use Carbon\Carbon;
 use Image;
@@ -16,11 +17,12 @@ class FilmController extends Controller
 {
     public function index()
     {
-        return response()->json(Film::all(), 200);
+        return response()->json(Film::latest('created_at')->orderBy('created_at', 'desc')->take(100)->get(), 200);
     }
 
     public function show(Film $slug)
     {
+        $slug->comments = $slug->comments; // $slug->comments()->with('user')->get();
         return response()->json($slug, 200);
     }
 

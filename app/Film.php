@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+// use App\Comment;
+// use App\User;
 
 class Film extends Model
 {
@@ -31,12 +33,13 @@ class Film extends Model
         return 'slug';
     }
 
-    public function films()
+    public function comments()
     {
-        $this->hasMany('\Models\Comment','film_id','id');
+        return $this->hasMany('App\Comment');
     }
+
     public function user()
     {
-        $this->belongsTo('\Models\User','user_id','id');
+        return $this->belongsTo('App\User');
     }
 }
